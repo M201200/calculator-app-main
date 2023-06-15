@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="./src/mainStyles.css">
+  <script src="./dist/index.js" defer></script>
+
+  <title>Frontend Mentor | Calculator app</title>
+
+</head>
+<body>
+<div id="wrapper">
+
+  <div id="upper-panel">
+
+    <span id="logo">calc</span>
+    
+    <form id="theme-buttons">
+      <span id="theme-text">THEME</span>
+      <ul>
+
+        <li>
+          <label for="default-theme">1</label>
+          <input type="radio" name="theme" id="default-theme">
+        </li>
+        <li>
+          <label for="light-theme">2</label>
+          <input type="radio" name="theme" id="light-theme">
+        </li>
+        <li>
+          <label for="dark-theme">3</label>
+          <input type="radio" name="theme" id="dark-theme">
+        </li>
+        
+      </ul>
+    </form>
+  </div>
+
+  <div id="input-frame">
+    <div id="prev-value"></div>
+    <input type="text" id="current-value" value="">
+  </div>
+
+  <div id="buttons-container">
+    <button class="button" data-input>7</button>
+    <button class="button" data-input>8</button>
+    <button class="button" data-input>9</button>
+    <button class="button" data-del>del</button>
+    <button class="button" data-input>4</button>
+    <button class="button" data-input>5</button>
+    <button class="button" data-input>6</button>
+    <button class="button" data-input>+</button>
+    <button class="button" data-input>1</button>
+    <button class="button" data-input>2</button>
+    <button class="button" data-input>3</button>
+    <button class="button" data-input>-</button>
+    <button class="button" data-input>.</button>
+    <button class="button" data-input>0</button>
+    <button class="button" data-input>/</button>
+    <button class="button" data-input>*</button>
+    <button class="button span-2" data-reset>RESET</button>
+    <button class="button span-2" data-resolve>=</button>
+  </div>
+
+</div>
+</body>
+</html>
