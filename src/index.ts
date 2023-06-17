@@ -7,10 +7,16 @@
 
 const currentValueElement: HTMLInputElement = document.querySelector("#current-value")!
 const previousValueElement: HTMLElement = document.querySelector("#prev-value")!
+
 const inputButtons = Array.from(document.querySelectorAll("[data-input]"))!
-const resolveButton = document.querySelector("[data-resolve]") as HTMLButtonElement
-const deleteButton = document.querySelector("[data-del]") as HTMLButtonElement
-const resetButton = document.querySelector("[data-reset]") as HTMLButtonElement
+const themeButtons = Array.from(document.querySelectorAll("[data-theme]"))!
+
+const resolveButton:HTMLButtonElement = document.querySelector("[data-solve]")!
+const deleteButton:HTMLButtonElement = document.querySelector("[data-del]")!
+const resetButton: HTMLButtonElement = document.querySelector("[data-reset]")!
+
+const colorScheme = localStorage.getItem("color-scheme") || "default"
+document.documentElement.setAttribute("data-color-scheme", colorScheme)
 
 
 ///////////////////
@@ -19,6 +25,13 @@ const resetButton = document.querySelector("[data-reset]") as HTMLButtonElement
 ///////////////////
 ///////////////////
 
+
+function setColorScheme (event: Event) {
+const radio = event.target as HTMLInputElement
+const radioId = radio.id.toString()
+document.documentElement.setAttribute("data-color-scheme", radioId)
+localStorage.setItem("color-scheme", radioId)   
+}
 
 function insertInput (event: Event) {
 let button = event.target as HTMLButtonElement
@@ -43,11 +56,11 @@ if (/[-+\*\/]$/.test(currentValueElement.value)){
 
 
 const convertStringToMath = {
-    '+': function (x: number, y: number) { return x + y },
-    '-': function (x: number, y: number) { return x - y },
-    '*': function (x: number, y: number) { return x * y },
-    '/': function (x: number, y: number) { return x / y }
-}​​​​​​​;
+    '+': (x: number, y: number) => { return x + y },
+    '-': (x: number, y: number) => { return x - y },
+    '*': (x: number, y: number) => { return x * y },
+    '/': (x: number, y: number) => { return x / y }
+}​​​​​​​
 
 function computeChain () {
     if (/^[-+\*\/]$/.test(currentValueElement.value)) {
@@ -63,7 +76,7 @@ function computeChain () {
     }
 }
 
-function resolve () {
+function solve () {
     if (currentValueElement.value && previousValueElement.innerText) {
         let firstNumber = +previousValueElement.innerText.slice(0, -1)
         let secondNumber = +currentValueElement.value
@@ -91,12 +104,17 @@ function reset () {
 /////////////////////////
 /////////////////////////
 
+
 inputButtons.forEach(button => {
     button.addEventListener("click", (event) => {
         insertInput(event)
         computeChain()
         appendPreviousValue()
     })
+})
+
+themeButtons.forEach(button => {
+    button.addEventListener("click", (setColorScheme))
 })
 
 currentValueElement.addEventListener("input", (event) => {
@@ -110,11 +128,11 @@ deleteButton.addEventListener("click", (deleteInput))
 
 resetButton.addEventListener("click", (reset))
 
-resolveButton.addEventListener("click", (resolve))
+resolveButton.addEventListener("click", (solve))
 
 currentValueElement.addEventListener("keypress", (event) => {
 
     if (event.key === 'Enter' || event.key === "=") {
-        resolve()
+        solve()
     }
 })

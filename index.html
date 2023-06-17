@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="./src/mainStyles.css">
   <script src="./dist/index.js" defer></script>
 
@@ -17,22 +22,20 @@
   <div id="upper-panel">
 
     <span id="logo">calc</span>
+    <span id="theme-text">THEME</span>
     
     <form id="theme-buttons">
-      <span id="theme-text">THEME</span>
       <ul>
 
         <li>
           <label for="default-theme">1</label>
-          <input type="radio" name="theme" id="default-theme">
-        </li>
-        <li>
           <label for="light-theme">2</label>
-          <input type="radio" name="theme" id="light-theme">
-        </li>
-        <li>
           <label for="dark-theme">3</label>
-          <input type="radio" name="theme" id="dark-theme">
+        </li>
+        <li id="radio-buttons">
+          <input type="radio" name="theme" id="default" data-theme>
+          <input type="radio" name="theme" id="light" data-theme>
+          <input type="radio" name="theme" id="dark" data-theme>
         </li>
         
       </ul>
@@ -62,7 +65,7 @@
     <button class="button" data-input>/</button>
     <button class="button" data-input>*</button>
     <button class="button span-2" data-reset>RESET</button>
-    <button class="button span-2" data-resolve>=</button>
+    <button class="button span-2" data-solve>=</button>
   </div>
 
 </div>

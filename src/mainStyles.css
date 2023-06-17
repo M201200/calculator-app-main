@@ -4,79 +4,219 @@
     padding: 0;
     text-decoration: none;
     list-style: none;
-    border: none
-    /* border: .1rem solid black; */
+    border: none;
+
+    font-family: inherit;
+    font-size: inherit;
+
+    /* border: 1px solid black; */
+}
+
+:root {
+--bg-body: hsl(222, 26%, 31%);
+--bg-keypad-themeToggle: hsl(223, 31%, 20%);
+--bg-screen: hsl(224, 36%, 15%);
+--bg-general-keys: hsl(30, 25%, 89%);
+--shadow-general-keys: hsl(28, 16%, 65%);
+--bg-equal-toggle-key: hsl(6, 63%, 50%);
+--shadow-equal-toggle-key: hsl(6, 70%, 34%);
+--bg-reset-del-keys: hsl(225, 21%, 49%);
+--shadow-reset-del-keys: hsl(224, 28%, 35%);
+
+--color-text-main: hsl(221, 14%, 31%);
+--color-text-alternative: hsl(0, 0%, 100%);
+--color-text-equal: var(--color-text-alternative);
+--color-text-logo-mainInput: var(--color-text-alternative);
+--color-text-prev-value: hsl(0, 0%, 90%);
+
+--border-radius: 0.8rem;
+
+--box-shadow-keys: 0 5px;
+}
+
+:root[data-color-scheme="light"] {
+    --bg-body: hsl(0, 0%, 90%);
+    --bg-keypad-themeToggle: hsl(0, 5%, 81%);
+    --bg-screen: hsl(0, 0%, 93%);
+    --bg-general-keys: hsl(45, 7%, 89%);
+    --shadow-general-keys: hsl(35, 11%, 61%);
+    --bg-equal-toggle-key: hsl(25, 98%, 40%);
+    --shadow-equal-toggle-key: hsl(25, 99%, 27%);
+    --bg-reset-del-keys: hsl(185, 42%, 37%);
+    --shadow-reset-del-keys: hsl(185, 58%, 25%);
+
+    --color-text-main: hsl(60, 10%, 19%);
+    --color-text-alternative: hsl(0, 0%, 100%);
+    --color-text-equal: var(--color-text-alternative);
+    --color-text-logo-mainInput: var(--color-text-main);
+    --color-text-prev-value: hsl(60, 5%, 29%);
+}
+
+:root[data-color-scheme="dark"] {
+    --bg-body: hsl(268, 75%, 9%);
+    --bg-keypad-themeToggle: hsl(268, 71%, 12%);
+    --bg-screen: var(--bg-keypad-themeToggle);
+    --bg-general-keys: hsl(268, 47%, 21%);
+    --shadow-general-keys: hsl(290, 70%, 36%);
+    --bg-equal-toggle-key: hsl(176, 100%, 44%);
+    --shadow-equal-toggle-key: hsl(177, 92%, 70%);
+    --bg-reset-del-keys: hsl(281, 89%, 26%);
+    --shadow-reset-del-keys: hsl(285, 91%, 52%);
+
+    --color-text-main: hsl(52, 100%, 62%);
+    --color-text-alternative: hsl(0, 0%, 100%);
+    --color-text-equal: hsl(198, 20%, 13%);
+    --color-text-logo-mainInput: var(--color-text-main);
+    --color-text-prev-value: hsl(52, 100%, 75%);
 }
 
 body {
-    background-color: antiquewhite;
+    background-color: var(--bg-body);
 
     height: 100vh;
     height: 100svh;
 
     display: grid;
     place-items: center;
+
+    font-family: 'League Spartan', sans-serif;
 }
 
 #wrapper {
-    height: 70vh;
-    width: min(40rem, 90%);
+    height: 80vh;
+    width: min(30rem, 95%);
 
     display: grid;
     grid-template-rows: 4rem 8rem 1fr;
-    gap: 1rem
-
+    gap: 1rem;
 }
 
 #upper-panel {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 3.5rem 4rem;
+    align-items: end;
+
+    color: var(--color-text-logo-mainInput);
 }
 
-#theme-buttons,
-#theme-buttons ul {
-    display: flex;
+#logo {
+    font-size: 2rem;
+}
+
+#theme-text {
+    font-size: .8rem;
+}
+
+#theme-buttons li{
+    display: grid;
+    grid-template-columns: repeat(3, 1rem);
+    justify-content: space-around;
+    align-items: center;
+
+    font-size: .8rem;
+}
+
+#radio-buttons {
+    background-color: var(--bg-keypad-themeToggle);
+    border-radius: 0.5rem;
+
+    height: 1.4rem;
+}
+
+#theme-buttons [type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+#theme-buttons [type="radio"]:checked {
+    background-color: var(--bg-equal-toggle-key);
 }
 
 #theme-buttons li {
      display: grid;
+
+     text-align: center;
 }
 
 #input-frame {
     display: grid;
     grid-template-rows: 2rem 1fr;
 
-    background-color: gray;
-    border-radius: .8rem;
+    background-color: var(--bg-screen);
+    border-radius: var(--border-radius);
 }
 
 #prev-value,
 #current-value {
     background: none;
-    border-radius: .8rem;
+    border-radius: var(--border-radius);
     padding: .5rem;
-
     text-align: end;
+
+}
+
+#current-value {
+    color: var(--color-text-logo-mainInput);
     font-size: 2rem;
+}
+
+#current-value:focus {
+    outline: 1px solid rgba(104, 102, 102, 0.774);
 }
 
 #prev-value {
     font-size: 1rem;
+    color: var(--color-text-prev-value);
+    font-size: 1.5rem;
+
 }
 
 #buttons-container {
     gap: .5rem;
-    padding: 1rem;
+    padding: 2rem;
     
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    background-color: var(--bg-keypad-themeToggle);
+    border-radius: var(--border-radius);
+
+    font-size: 2rem;
 }
 
 .button {
-    border-radius: .8rem;
+    border-radius: var(--border-radius);
+
+    background-color: var(--bg-general-keys);
+    box-shadow: var(--box-shadow-keys) var(--shadow-general-keys);
+
+    color: var(--color-text-main);
 }
 .span-2 {
     grid-column: span 2;
+}
+
+[data-reset],
+[data-del] {
+    background-color: var(--bg-reset-del-keys);
+    box-shadow: var(--box-shadow-keys) var(--shadow-reset-del-keys);
+
+    color: var(--color-text-alternative);
+
+    font-size: 1.8rem;
+}
+
+[data-solve] {
+    background-color: var(--bg-equal-toggle-key);
+    box-shadow: var(--box-shadow-keys) var(--shadow-equal-toggle-key);
+
+    color: var(--color-text-equal);
 }
 
 

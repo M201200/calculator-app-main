@@ -1,21 +1,24 @@
 "use strict";
-let currentValueElement = document.querySelector("#current-value");
-let previousValueElement = document.querySelector("#prev-value");
+const currentValueElement = document.querySelector("#current-value");
+const previousValueElement = document.querySelector("#prev-value");
 const inputButtons = Array.from(document.querySelectorAll("[data-input]"));
-const resolveButton = document.querySelector("[data-resolve]");
+const themeButtons = Array.from(document.querySelectorAll("[data-theme]"));
+const resolveButton = document.querySelector("[data-solve]");
 const deleteButton = document.querySelector("[data-del]");
 const resetButton = document.querySelector("[data-reset]");
+const colorScheme = localStorage.getItem("color-scheme") || "default";
+document.documentElement.setAttribute("data-color-scheme", colorScheme);
+function setColorScheme(event) {
+    const radio = event.target;
+    const radioId = radio.id.toString();
+    document.documentElement.setAttribute("data-color-scheme", radioId);
+    localStorage.setItem("color-scheme", radioId);
+}
 function insertInput(event) {
     let button = event.target;
     if (button.innerText === '.' && currentValueElement.value.includes("."))
         return;
     currentValueElement.value += button.innerText;
-}
-function appendPreviousValue() {
-    if (/[-+\*\/]$/.test(currentValueElement.value)) {
-        previousValueElement.innerText = currentValueElement.value.replace(/\.(?=[-+\*\/])/g, '');
-        currentValueElement.value = "";
-    }
 }
 function inputCheck(event) {
     let inputField = event.target;
@@ -24,11 +27,17 @@ function inputCheck(event) {
         inputField.value = inputField.value.replace(/(?<=\d*\.\d*)\.$/, '');
     }
 }
+function appendPreviousValue() {
+    if (/[-+\*\/]$/.test(currentValueElement.value)) {
+        previousValueElement.innerText = currentValueElement.value.replace(/\.(?=[-+\*\/])/g, '');
+        currentValueElement.value = "";
+    }
+}
 const convertStringToMath = {
-    '+': function (x, y) { return x + y; },
-    '-': function (x, y) { return x - y; },
-    '*': function (x, y) { return x * y; },
-    '/': function (x, y) { return x / y; }
+    '+': (x, y) => { return x + y; },
+    '-': (x, y) => { return x - y; },
+    '*': (x, y) => { return x * y; },
+    '/': (x, y) => { return x / y; }
 };
 function computeChain() {
     if (/^[-+\*\/]$/.test(currentValueElement.value)) {
@@ -43,7 +52,7 @@ function computeChain() {
         currentValueElement.value = '';
     }
 }
-function resolve() {
+function solve() {
     if (currentValueElement.value && previousValueElement.innerText) {
         let firstNumber = +previousValueElement.innerText.slice(0, -1);
         let secondNumber = +currentValueElement.value;
@@ -68,6 +77,9 @@ inputButtons.forEach(button => {
         appendPreviousValue();
     });
 });
+themeButtons.forEach(button => {
+    button.addEventListener("click", (setColorScheme));
+});
 currentValueElement.addEventListener("input", (event) => {
     inputCheck(event);
     computeChain();
@@ -75,10 +87,10 @@ currentValueElement.addEventListener("input", (event) => {
 });
 deleteButton.addEventListener("click", (deleteInput));
 resetButton.addEventListener("click", (reset));
-resolveButton.addEventListener("click", (resolve));
+resolveButton.addEventListener("click", (solve));
 currentValueElement.addEventListener("keypress", (event) => {
     if (event.key === 'Enter' || event.key === "=") {
-        resolve();
+        solve();
     }
 });
 //# sourceMappingURL=index.js.map
