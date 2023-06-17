@@ -10,6 +10,7 @@ const colorScheme = localStorage.getItem("color-scheme") || "default";
 document.documentElement.setAttribute("data-color-scheme", colorScheme);
 function setColorScheme(event) {
     const radio = event.target;
+    radio.checked = true;
     const radioId = radio.id.toString();
     document.documentElement.setAttribute("data-color-scheme", radioId);
     localStorage.setItem("color-scheme", radioId);

@@ -28,6 +28,7 @@ document.documentElement.setAttribute("data-color-scheme", colorScheme)
 
 function setColorScheme (event: Event) {
 const radio = event.target as HTMLInputElement
+radio.checked = true
 const radioId = radio.id.toString()
 document.documentElement.setAttribute("data-color-scheme", radioId)
 localStorage.setItem("color-scheme", radioId)   
