@@ -1,9 +1,9 @@
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
     list-style: none;
     border: none;
+    margin: 0;
+    padding: 0;
 
     font-family: inherit;
     font-size: inherit;
@@ -101,8 +101,6 @@ body {
     grid-template-columns: 1fr 3.5rem 4rem;
     align-items: end;
 
-    
-
     color: var(--color-text-logo-mainInput);
 }
 
@@ -124,10 +122,10 @@ body {
 }
 
 #radio-buttons {
-    background-color: var(--bg-keypad-themeToggle);
-    border-radius: 0.5rem;
-
     height: 1.4rem;
+    border-radius: 0.5rem;
+    
+    background-color: var(--bg-keypad-themeToggle);
 }
 
 #theme-buttons [type="radio"] {
@@ -169,7 +167,7 @@ body {
 
 #current-value {
     color: var(--color-text-logo-mainInput);
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 #current-value:focus {
@@ -177,10 +175,8 @@ body {
 }
 
 #prev-value {
-    font-size: 1rem;
     color: var(--color-text-prev-value);
     font-size: 1.5rem;
-
 }
 
 #buttons-container {
@@ -198,12 +194,13 @@ body {
 }
 
 .button {
-    border-radius: var(--border-radius);
-
     background-color: var(--bg-general-keys);
+    border-radius: var(--border-radius);
+    
     box-shadow: var(--box-shadow-keys) var(--shadow-general-keys);
-
     color: var(--color-text-main);
+
+    cursor: pointer
 }
 .span-2 {
     grid-column: span 2;
