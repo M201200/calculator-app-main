@@ -8,12 +8,16 @@ const deleteButton = document.querySelector("[data-del]");
 const resetButton = document.querySelector("[data-reset]");
 const colorScheme = localStorage.getItem("color-scheme") || "default";
 document.documentElement.setAttribute("data-color-scheme", colorScheme);
+setRadioCheck(colorScheme);
 function setColorScheme(event) {
     const radio = event.target;
-    radio.checked = true;
     const radioId = radio.id.toString();
     document.documentElement.setAttribute("data-color-scheme", radioId);
     localStorage.setItem("color-scheme", radioId);
+}
+function setRadioCheck(colorScheme) {
+    const checkedElement = document.querySelector(`#${colorScheme}`);
+    checkedElement.checked = true;
 }
 function insertInput(event) {
     let button = event.target;

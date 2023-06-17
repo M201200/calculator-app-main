@@ -17,6 +17,7 @@ const resetButton: HTMLButtonElement = document.querySelector("[data-reset]")!
 
 const colorScheme = localStorage.getItem("color-scheme") || "default"
 document.documentElement.setAttribute("data-color-scheme", colorScheme)
+setRadioCheck(colorScheme)
 
 
 ///////////////////
@@ -28,10 +29,14 @@ document.documentElement.setAttribute("data-color-scheme", colorScheme)
 
 function setColorScheme (event: Event) {
 const radio = event.target as HTMLInputElement
-radio.checked = true
 const radioId = radio.id.toString()
 document.documentElement.setAttribute("data-color-scheme", radioId)
 localStorage.setItem("color-scheme", radioId)   
+}
+
+function setRadioCheck (colorScheme: string) {
+    const checkedElement = document.querySelector(`#${colorScheme}`)! as HTMLInputElement
+    checkedElement.checked = true
 }
 
 function insertInput (event: Event) {
